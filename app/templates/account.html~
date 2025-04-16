@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body p-5">
+                    <div class="text-center mb-5">
+                        <div class="avatar-container">
+                            <img src="https://ui-avatars.com/api/?name={{ current_user.username }}&background=6366f1&color=fff"
+                                 class="avatar" alt="Аватар">
+                        </div>
+                        <h2 class="mb-1">{{ current_user.username }}</h2>
+                        <p class="text-muted">{{ current_user.email }}</p>
+                    </div>
+
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+
+                        <div class="mb-4">
+                            <h5 class="mb-3">Основная информация</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    {{ form.username.label(class="form-label") }}
+                                    {{ form.username(class="form-control") }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.email.label(class="form-label") }}
+                                    {{ form.email(class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="mb-3">Смена пароля</h5>
+                            {{ form.current_password.label(class="form-label") }}
+                            {{ form.current_password(class="form-control", placeholder="Введите текущий пароль") }}
+
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    {{ form.new_password.label(class="form-label") }}
+                                    {{ form.new_password(class="form-control", placeholder="Новый пароль") }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.password_confirm.label(class="form-label") }}
+                                    {{ form.password_confirm(class="form-control", placeholder="Подтвердите пароль") }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-5">
+                            <a href="/logout/" class="btn btn-outline-secondary">
+                                Выйти
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                Сохранить изменения
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

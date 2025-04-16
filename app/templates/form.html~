@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Наша команда | IT-Компания{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Форма добавления сотрудника -->
+        <div class="col-lg-5 mb-5 mb-lg-0">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-user-plus me-2"></i>
+                        <h2 class="h5 mb-0">Анкета сотрудника</h2>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action="/form" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">
+                                <i class="fas fa-user me-1"></i> Имя
+                            </label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                            <div class="invalid-feedback">Пожалуйста, укажите имя</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="city" class="form-label">
+                                <i class="fas fa-city me-1"></i> Город
+                            </label>
+                            <input type="text" class="form-control" id="city" name="city">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="age" class="form-label">
+                                <i class="fas fa-birthday-cake me-1"></i> Возраст
+                            </label>
+                            <input type="number" class="form-control" id="age" name="age" min="18" max="99">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="hobby" class="form-label">
+                                <i class="fas fa-heart me-1"></i> Хобби
+                            </label>
+                            <textarea class="form-control" id="hobby" name="hobby" rows="2"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2">
+                            <i class="fas fa-paper-plane me-2"></i> Отправить
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Список сотрудников -->
+        <div class="col-lg-7">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="h4 mb-0">
+                    <i class="fas fa-users me-2"></i> Наша команда
+                </h2>
+                <span class="badge bg-primary rounded-pill">{{ crew|length }} человек</span>
+            </div>
+
+            {% if crew %}
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                {% for member in crew %}
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3 me-3">
+                                    <i class="fas fa-user fa-lg"></i>
+                                </div>
+                                <h3 class="h6 mb-0">Сотрудник #{{ loop.index }}</h3>
+                            </div>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2">
+                                    <i class="fas fa-user me-2 text-muted"></i>
+                                    <strong>Имя:</strong> {{ member.name }}
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-city me-2 text-muted"></i>
+                                    <strong>Город:</strong> {{ member.city or 'Не указан' }}
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-birthday-cake me-2 text-muted"></i>
+                                    <strong>Возраст:</strong> {{ member.age or 'Не указан' }}
+                                </li>
+                                <li>
+                                    <i class="fas fa-heart me-2 text-muted"></i>
+                                    <strong>Хобби:</strong> {{ member.hobby or 'Не указано' }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pt-0">
+                            <small class="text-muted">
+                                Добавлен {{ loop.index }} дней назад
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-5">
+                    <i class="fas fa-users-slash fa-3x text-muted mb-3"></i>
+                    <h3 class="h5">Команда пуста</h3>
+                    <p class="text-muted mb-0">Добавьте первого сотрудника с помощью формы</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+// Пример валидации формы
+(function() {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+})();
+</script>
+{% endblock %}

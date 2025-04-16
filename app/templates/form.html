@@ -1,66 +1,69 @@
 {% extends 'base.html' %}
 
-{% block title %}
-  Карточки пользователей
-{% endblock %}
+{% block title %}Команда | NeuroTech{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <!-- Узкая форма (занимает 6 колонок из 12 на средних экранах) -->
-        <div class="col-md-6 col-lg-5 mb-4">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
-                    <h1 class="h4 mb-0">Анкета пользователя</h1>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-5 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="h5 mb-0">Добавить сотрудника</h2>
                 </div>
-
                 <div class="card-body">
                     <form method="POST" action="/form">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Имя:</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <label class="form-label">Полное имя</label>
+                            <input type="text" class="form-control" name="name" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="city" class="form-label">Город:</label>
-                            <input type="text" class="form-control" id="city" name="city">
+                            <label class="form-label">Город</label>
+                            <input type="text" class="form-control" name="city">
                         </div>
 
                         <div class="mb-3">
-                            <label for="age" class="form-label">Возраст:</label>
-                            <input type="number" class="form-control" id="age" name="age" min="1" max="120">
+                            <label class="form-label">Возраст</label>
+                            <input type="number" class="form-control" name="age">
                         </div>
 
-                        <div class="mb-3">
-                            <label for="hobby" class="form-label">Хобби:</label>
-                            <textarea class="form-control" id="hobby" name="hobby" rows="2"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100">Отправить</button>
+                        <button type="submit" class="btn btn-primary w-100">Сохранить</button>
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- Карточки пользователей в несколько колонок -->
-        <div class="col-12">
-            <h2 class="h4 mb-3">Список пользователей</h2>
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                {% for user in users %}
-                <div class="col">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-header bg-light">
-                            <h3 class="h6 mb-0">Пользователь #{{ loop.index }}</h3>
-                        </div>
-                        <div class="card-body">
-                            <p><strong>Имя:</strong> {{ user.name }}</p>
-                            <p><strong>Город:</strong> {{ user.city }}</p>
-                            <p><strong>Возраст:</strong> {{ user.age }}</p>
-                            <p><strong>Хобби:</strong> {{ user.hobby }}</p>
-                        </div>
-                    </div>
+        <div class="col-lg-7">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h2 class="h5 mb-0">Наша команда</h2>
+                    <span class="badge bg-primary">{{ crew|length }}</span>
                 </div>
-                {% endfor %}
+
+                <div class="card-body">
+                    {% if crew %}
+                    <div class="row row-cols-1 g-3">
+                        {% for member in crew %}
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="h6 mb-3">{{ member.name }}</h3>
+                                    <div class="row text-muted">
+                                        <div class="col-4">Город: {{ member.city or '-' }}</div>
+                                        <div class="col-4">Возраст: {{ member.age or '-' }}</div>
+                                        <div class="col-4">Стаж: {{ member.exp }} лет</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <p class="text-muted">Нет данных о сотрудниках</p>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

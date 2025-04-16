@@ -1,45 +1,48 @@
 {% extends 'base.html' %}
 
-{%block title %}
-  Котнтакты
-{% endblock %}
+{% block title %}Контакты | NeuroTech{% endblock %}
 
 {% block content %}
-
-    <div class="container py-5">
-      <h1 class="mb-4 text-center">📞 Контакты</h1>
-      <p class="text-center text-muted mb-5">Свяжитесь с нами — мы всегда на связи!</p>
-
-      <div class="row g-4">
-        <div class="col-md-6">
-          <div class="p-4 bg-light rounded shadow-sm h-100">
-            <h5>📬 Наши данные</h5>
-            <p><strong>Email:</strong> info@company.com</p>
-            <p><strong>Телефон:</strong> +7 (000) 123-45-67</p>
-            <p><strong>Адрес:</strong> г. Москва, ул. Примерная, д. 1</p>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="p-4 bg-light rounded shadow-sm h-100">
-            <h5>📝 Обратная связь</h5>
-            <form>
-              <div class="mb-3">
-                <label for="name" class="form-label">Имя</label>
-                <input type="text" class="form-control" id="name" placeholder="Ваше имя">
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="you@example.com">
-              </div>
-              <div class="mb-3">
-                <label for="message" class="form-label">Сообщение</label>
-                <textarea class="form-control" id="message" rows="3" placeholder="Ваше сообщение..."></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Отправить</button>
-            </form>
-          </div>
-        </div>
-      </div>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="hero-title">Контакты</h1>
+        <p class="hero-subtitle">Свяжитесь с нами удобным способом</p>
     </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="h5 mb-4">Контактная информация</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><strong>Адрес:</strong> Москва, ул. Технологическая, 15</li>
+                        <li class="mb-3"><strong>Телефон:</strong> +7 (495) 123-45-67</li>
+                        <li class="mb-3"><strong>Email:</strong> info@neurotech.ru</li>
+                        <li><strong>Часы работы:</strong> Пн-Пт 9:00–18:00</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="h5 mb-4">Форма обратной связи</h3>
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Ваше имя">
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="4" placeholder="Сообщение"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

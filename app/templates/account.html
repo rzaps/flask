@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль | NeuroTech{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center mb-5">
+                        <h2 class="hero-title">{{ current_user.username }}</h2>
+                        <p class="text-muted">{{ current_user.email }}</p>
+                    </div>
+
+                    <form method="POST">
+                        <div class="mb-4">
+                            <h3 class="h5 mb-4">Основные данные</h3>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Логин</label>
+                                    <input type="text" class="form-control" value="{{ current_user.username }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" value="{{ current_user.email }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h3 class="h5 mb-4">Смена пароля</h3>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <input type="password" class="form-control" placeholder="Текущий пароль">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="password" class="form-control" placeholder="Новый пароль">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="password" class="form-control" placeholder="Подтвердите пароль">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="/logout" class="btn btn-outline-secondary">Выход</a>
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
